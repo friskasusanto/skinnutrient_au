@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use App\User;
+use App\Role;
+use App\Regencies;
+use App\Districts;
+use App\Villages;
+use Mail;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -28,7 +35,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
+    // RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -50,7 +58,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -63,10 +71,74 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $status = 200;
+        $message = "Berhasil";
+        $village = $data['village'];
+        $regency = $data['regency'];
+
+        $user = User::create([
             'name' => $data['name'],
+            'nama_belakang' => $data['nama_belakang'],
+            'phone' => $data['phone'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'provinsi_id' => $data['state'],
+            'kabupaten_id' => $data['city'],
+            'kota_id' => $data['regency'],
+            'kelurahan_id' => $data['village'],
+            'address' => $data['address'],
+            'password' => bcrypt($data['password']),
         ]);
+
+        if ($village == NULL || $village == '-- Pilih Kelurahan/Desa --'){
+            $user = User::create([
+            'name' => $data['name'],
+            'nama_belakang' => $data['nama_belakang'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'provinsi_id' => $data['state'],
+            'kabupaten_id' => $data['city'],
+            'kota_id' => $data['regency'],
+            'kelurahan_id' => NULL,
+            'address' => $data['address'],
+            'password' => bcrypt($data['password']),
+        ]);
+        } 
+        if ($regency == NULL || $regency == '-- Pilih Kota --'){
+            $user = User::create([
+            'name' => $data['name'],
+            'nama_belakang' => $data['nama_belakang'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'provinsi_id' => $data['state'],
+            'kabupaten_id' => $data['city'],
+            'kota_id' => NULL,
+            'kelurahan_id' => NULL,
+            'address' => $data['address'],
+            'password' => bcrypt($data['password']),
+        ]);
+        }
+        // dd($user);
+        $user->assignRole('Member');
+
+        return $user;
     }
+    public function regencies($id)
+    {
+        $cities = Regencies::where('province_id', $id)->pluck('name','id');
+        return json_encode($cities);
+    }
+    public function districts($id)
+    {
+        $cities = Regencies::find($id);
+        $district = Districts::where('regency_id', $cities->id)->pluck('name','id');
+        return json_encode($district);
+    }
+    public function villages($id)
+    {
+        $district = Districts::find($id);
+        $villages = Villages::where('district_id', $district->id)->pluck('name','id');
+        return json_encode($villages);
+    }
+
+    
 }

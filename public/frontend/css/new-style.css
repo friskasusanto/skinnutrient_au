@@ -1,0 +1,33 @@
+/*body {margin:2rem;}*/
+
+.modal-dialog {
+      max-width: 800px;
+      margin: 30px auto;
+  }
+
+.close {
+  position:absolute;
+  right:-30px;
+  top:0;
+  z-index:999;
+  font-size:2rem;
+  font-weight: normal;
+  color:#fff;
+  opacity:1;
+}
+
+.shop_search {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+/* Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .owl-carousel.owl-loaded {
+    padding-top: 60px;
+  }
+}*/
+
+.about_area .content {
+  padding-top: 50px;
+}

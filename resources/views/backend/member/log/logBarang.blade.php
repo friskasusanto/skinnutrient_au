@@ -2,49 +2,6 @@
 @section('title', 'LogMember')
 @section('content')
 
-<style>
-    body {font-family: Arial, Helvetica, sans-serif;}
-
-    /* The Modal (background) */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 100px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-
-    /* Modal Content */
-    .modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-    }
-
-    /* The Close Button */
-    .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
-</style>
-
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
@@ -106,7 +63,7 @@
                                     <td>{{$u->product->name}}</td>
                                     <td>
                                         <center>
-                                            <a href="{{url('/member/show', $u->id)}}" class="btn btn-success btn-sm" style="width: 50%"><i class="fa fa-eye"></i></a>
+                                            <a type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter{{$u->id}}"><i class="fa fa-eye"></i></a>
                                         </center>
                                     </td>
                                     <td>
@@ -131,6 +88,9 @@
                                     </center>
                                     @endif
                                     </td>
+
+                                    
+
                                 </tr>
                                 @endforeach
                             @else
@@ -147,67 +107,66 @@
         </div>
     </div>
 </div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p><center>Tambah Barang</center></p>
-    <br/>
-    <br/>
-
-    <p id="detail-product"></p>
-    <p>jajal</p>
-  </div>
-
+@if(isset($log))
+@foreach( $log as $u )
+<div class="modal" id="exampleModalCenter{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail Pembelian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <tr>
+                    <th>Tanggal Beli</th>
+                    <td>: {{ $u->date_entry }}</td>
+                </tr>
+                <br/>
+                <tr>
+                    <th>Nama Penerima</th>
+                    <td>: {{ $u->receiver_name }}</td>
+                </tr>
+                <br/>
+                <tr>
+                    <th>Alamat</th>
+                    <td>: {{ $u->address }}</td>
+                </tr>
+                <br/>
+                <tr>
+                    <th>No Telfon</th>
+                    <td>:{{ $u->phone_number }}</td>
+                </tr>
+                <br/>
+                <tr>
+                    <th>Total Pembelian</th>
+                    <td>: {{ $u->total_amount }}</td>
+                </tr>
+                <br/>
+                <tr>
+                    <th>Payment</th>
+                    <td>: </td>
+                </tr>
+                <br/>
+                <tr>
+                    <th>Courier</th>
+                    <td>: </td>
+                </tr>
+                <br/>
+                <tr>
+                    <th>Nama Product</th>
+                    <td>: {{ $u->product->name }}</td>
+                </tr>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
-
-@endsection
-
-@section('content-js')
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-
-    $(function(){
-        $("#myBtn").click(function(){
-            var barang = $("#barang").val();
-            // alert(barang);
-            $.get("{{url('/member/show/')}}"+'/'+'$log->id', function(data){
-                // alert(data);
-                // console.log(data);
-                $("#id").val(data.data.id);
-                $("#detail-product")
-                .append("<b>Nama Produk:</b> "+data.data.name)
-                .append("<p>"+"<b>Harga Produk:</b> "+data.data.price+"</p>")
-                .append("<p>"+"<b>Deskripsi Produk:</b> "+data.data.description+"</p>")
-                .append("<p>"+"<b>Stok Produk: </b>"+data.data.stock+"</p>");
-            });
-        });
-    });
-</script>
+@endforeach
+@endif
 @endsection

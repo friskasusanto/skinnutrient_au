@@ -87,17 +87,17 @@
                             @role('Admin')
                                 <a class="dropdown-item" href="{{ url('/') }}">
                                     <i class="fas fa-home"></i>
-                                    HOME EAORON</a>
+                                    HOME SKINNUTRIENT</a>
                             @endrole
                             @role('Member')
                                 <a class="dropdown-item" href="{{ url('/') }}">
                                     <i class="fas fa-home"></i>
-                                    HOME EAORON</a>
+                                    HOME SKINNUTRIENT</a>
                             @endrole
                             @role('Reseller')
                                 <a class="dropdown-item" href="{{ url('/') }}">
                                     <i class="fas fa-home"></i>
-                                    HOME EAORON</a>
+                                    HOME SKINNUTRIENT</a>
                                 <a class="dropdown-item" href="{{url('/reseller/ketentuan')}}">
                                     <i class="fas fa-book"></i>
                                     Ketentuan Reseller</a>
@@ -105,7 +105,7 @@
                             @role('Dropshiper')
                                 <a class="dropdown-item" href="{{ url('/shop/dropship') }}">
                                     <i class="fas fa-home"></i>
-                                    HOME EAORON</a>
+                                    HOME SKINNUTRIENT</a>
                                 <a class="dropdown-item" href="{{url('/dropship/ketentuan')}}">
                                     <i class="fas fa-book"></i>
                                     Ketentuan Dropshiper</a>

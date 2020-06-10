@@ -22,8 +22,8 @@ class BlogController extends Controller
     	$blog = Blog::find($id);
     	$comment_count = Comment::where('blog_id', $blog->id)->first();
     	$comment = Comment::where('blog_id', $blog->id)->get();
-    	$comment_child = Comment::where('blog_id', $blog->id)->where('child', 1)->first();
-    	$comment_parent = Comment::where('blog_id', $blog->id)->where('parent', 0)->get();
+    	$comment_child = Comment::where('blog_id', $blog->id)->where('child', 1)->orderBy('created_at', 'desc')->first();
+    	$comment_parent = Comment::where('blog_id', $blog->id)->where('parent', 0)->orderBy('created_at', 'desc')->get();
     	$search = Blog::orderBy('created_at', 'desc')->paginate(10);
     	if ($request->judul) {
             $search = Blog::orWhere('judul', 'like', '%'.$request->judul.'%')->orderBy('created_at', 'desc')->paginate(10);

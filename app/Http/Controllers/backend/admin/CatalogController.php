@@ -65,9 +65,12 @@ class CatalogController extends Controller
     	$edit->produk_id = $request->product_id;
     	$edit->user_id = Auth::user()->id;
     	$edit->price_user = $request->price_user;
+        // dd($request->price_user);
     	$edit->date_entry = date('Y-m-d H:i:s');
     	$edit->status = 1;
     	$edit->save();
+
+
 
         $log = new Log;
         $log->mutasi_action = "tambah catalog ";

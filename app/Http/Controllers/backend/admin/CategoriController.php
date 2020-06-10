@@ -48,10 +48,9 @@ class CategoriController extends Controller
 
     	return redirect('/admin/category/index')->with(['flash_status' => $status,'flash_message' => $message]);
     }
-    public function add_view (Request $request)
+    public function add_view ()
     {
-    	$category = Category::find($id);
-    	return view('backend.admin.category.edit', compact(['category']));
+    	return view('backend.admin.category.add');
     }
 
     public function add (Request $request)

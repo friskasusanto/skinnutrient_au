@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Log;
+use Auth;
 
 class UserController extends Controller
 {
@@ -53,7 +54,7 @@ class UserController extends Controller
     	$edit->save();
 
         $log = new Log;
-        $log->mutasi_action = "edit user ". $user->name;
+        $log->mutasi_action = "edit user ". $edit->name;
         $log->user_id = Auth::user()->id;
         $log->controller = "UserController";
         $log->function = "edit";

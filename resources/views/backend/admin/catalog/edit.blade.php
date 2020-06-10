@@ -61,7 +61,6 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <select name="product_id" type="text" class="form-control pull-right select2" style="width: 100%">
-			                              <option value="">--pilih product--</option>
 			                              <option value="">--{{$catalog->product->name}}--</option>
 			                              @foreach ($product as $p)
 			                              	<option value= "{{$p->id}}">{{$p->name}}</option>

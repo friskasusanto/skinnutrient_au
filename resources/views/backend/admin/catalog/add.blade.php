@@ -5,12 +5,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Edit Catalog</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Tambah Catalog</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Catalog</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Edit Catalog</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Tambah Catalog</li>
                     </ol>
                 </nav>
             </div>
@@ -50,7 +50,7 @@
 			        </div>
 			        @endif
                     <form novalidate="novalidate" method="POST" action= "{{action('backend\admin\CatalogController@add')}}" enctype="multipart/form-data">
-                    {{ csrf_field() }}\
+                    {{ csrf_field() }}
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-3">
@@ -77,7 +77,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <input type="number" class="form-control pull-right" id="" placeholder="price" name="price_user" required >
+                                    <input type="text" class="form-control pull-right" id="" placeholder="price" name="price_user"  required>
                                 </div>
                             </div>
                         </div>
@@ -92,4 +92,92 @@
 		</div>
 	</div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    function tandaPemisahTitik(b){
+        var _minus = false;
+        if (b<0) _minus = true;
+        b = b.toString();
+        b=b.replace(",","");
+        b=b.replace("-","");
+        c = "";
+        panjang = b.length;
+        j = 0;
+        for (i = panjang; i > 0; i--){
+        j = j + 1;
+        if (((j % 3) == 1) && (j != 1)){
+        c = b.substr(i-1,1) + "," + c;
+        } else {
+        c = b.substr(i-1,1) + c;
+        }
+        }
+        if (_minus) c = "-" + c ;
+        return c;
+        }
+
+        function numbersonly(ini, e){
+        if (e.keyCode>=49){
+        if(e.keyCode<=57){
+        a = ini.value.toString().replace(",","");
+        b = a.replace(/[^\d]/g,"");
+        b = (b=="0")?String.fromCharCode(e.keyCode):b + String.fromCharCode(e.keyCode);
+        ini.value = tandaPemisahTitik(b);
+        return false;
+        }
+        else if(e.keyCode<=105){
+        if(e.keyCode>=96){
+        //e.keycode = e.keycode - 47;
+        a = ini.value.toString().replace(",","");
+        b = a.replace(/[^\d]/g,"");
+        b = (b=="0")?String.fromCharCode(e.keyCode-48):b + String.fromCharCode(e.keyCode-48);
+        ini.value = tandaPemisahTitik(b);
+        //alert(e.keycode);
+        return false;
+        }
+        else {return false;}
+        }
+        else {
+        return false; }
+        }else if (e.keyCode==48){
+        a = ini.value.replace(",","") + String.fromCharCode(e.keyCode);
+        b = a.replace(/[^\d]/g,"");
+        if (parseFloat(b)!=0){
+        ini.value = tandaPemisahTitik(b);
+        return false;
+        } else {
+        return false;
+        }
+        }else if (e.keyCode==95){
+        a = ini.value.replace(",","") + String.fromCharCode(e.keyCode-48);
+        b = a.replace(/[^\d]/g,"");
+        if (parseFloat(b)!=0){
+        ini.value = tandaPemisahTitik(b);
+        return false;
+        } else {
+        return false;
+        }
+        }else if (e.keyCode==8 || e.keycode==46){
+        a = ini.value.replace(",","");
+        b = a.replace(/[^\d]/g,"");
+        b = b.substr(0,b.length -1);
+        if (tandaPemisahTitik(b)!=""){
+        ini.value = tandaPemisahTitik(b);
+        } else {
+        ini.value = "";
+        }
+
+        return false;
+        } else if (e.keyCode==9){
+        return true;
+        } else if (e.keyCode==17){
+        return true;
+        } else {
+        //alert (e.keyCode);
+        return false;
+        }
+
+        }
+
+</script>
 @endsection

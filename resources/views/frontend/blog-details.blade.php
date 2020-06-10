@@ -90,6 +90,7 @@
 									</li>
 									
 									
+								@if ($comment_child)
 									<li class="comment_reply">
 										<div class="wn__comment">
 											<!-- <div class="thumb">
@@ -97,14 +98,15 @@
 											</div> -->
 											<div class="content">
 												<div class="comnt__author d-block d-sm-flex">
-													<span><a href="#">{{$comment_child->name}}</a> Post author</span>
-													<span>{{$comment_child->created_at}}</span>
+													<span><a href="#">{{$comment_child}}</a> Post author</span>
+													<span>{{$comment_child}}</span>
 												</div>
-												<p>{{$comment_child->comment}}</p>
+												<p>{{$comment_child}}</p>
 											</div>
 										</div>
 									</li>
-									
+								@endif
+
 								</ul>
 							@endforeach
 							@endif

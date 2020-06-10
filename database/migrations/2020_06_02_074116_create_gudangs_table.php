@@ -19,7 +19,7 @@ class CreateGudangsTable extends Migration
             $table->UnsignedBigInteger('product_id')->nullable();
             $table->integer('jumlah')->nullable();
             $table->UnsignedBigInteger('user_id')->nullable();
-            $table->string('keterangan')->nullable();
+            $table->text('keterangan')->nullable();
             $table->date('tgl_input')->nullable();
             $table->timestamps();
 

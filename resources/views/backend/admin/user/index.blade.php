@@ -72,14 +72,12 @@
                                     <td>{{$u->deposit}}</td>
                                     <td>
                                         <center>
-                                        <a href="{{action('backend\admin\UserController@edit_view', $u->id)}}" class="btn btn-warning btn-icon-split btn-sm" style="font-size: xx-small;">
-                                            <i class="fas fa-edit" style="padding: 5px;"></i>
-                                        </a>
+                                            <a type="button" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{$u->id}}"><i class="fas fa-edit" style="padding: 5px;"></i></a>
 
-                                        <a href="{{action('backend\admin\UserController@delete', $u->id)}}"class="btn btn-danger btn-icon-split btn-sm" style="font-size: xx-small;">
-                                             <i class="fas fa-trash" style="padding: 5px;"></i> 
-                                        </a>
-                                    </center>
+                                            <a href="{{action('backend\admin\UserController@delete', $u->id)}}"class="btn btn-danger btn-icon-split btn-sm" style="font-size: xx-small;">
+                                                 <i class="fas fa-trash" style="padding: 5px;"></i> 
+                                            </a>
+                                        </center>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -96,5 +94,82 @@
         </div>
     </div>
 </div>
+
+@if(isset($user))
+@foreach( $user as $u )
+<div class="modal" id="exampleModalCenter{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form novalidate="novalidate" method="POST" action= "{{action('backend\admin\UserController@edit', $u->id)}}">
+                    {{ csrf_field() }}
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Nama Toko</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="" name="store_name" required style="width: 100%" value="{{ucfirst($u->store_name)}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Alamat</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="" name="address" required style="width: 100%" value="{{ucfirst($u->address)}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>No. HP</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control pull-right" id="" name="phone" required style="width: 100%" value="{{ucfirst($u->phone)}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Deposit</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="" name="deposit" required style="width: 100%" value="{{ucfirst($u->deposit)}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-info" id="btn_submit">Simpan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+@endif
 
 @endsection

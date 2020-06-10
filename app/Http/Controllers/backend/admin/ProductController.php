@@ -27,8 +27,9 @@ class ProductController extends Controller
     {
     	$search = \Request::get('search');
     	$product = Product::where('name', 'like', '%'.$search.'%')->orderBy('created_at', 'desc')->paginate(10);
+        $category = Category::all();
 
-    	return view('backend.admin.product.index', compact(['product']));
+    	return view('backend.admin.product.index', compact(['product', 'category']));
     }
 
     public function add_view_product()

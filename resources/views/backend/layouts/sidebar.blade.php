@@ -24,7 +24,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> 
+                        <!-- <li class="sidebar-item"> 
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                 <i class="far fa-user"></i>
                                 <span class="hide-menu">Acount Confirmation</span>
@@ -36,7 +36,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="sidebar-item"> 
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                 <i class="fab fa-product-hunt"></i>

@@ -6,12 +6,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Edit Category</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Tambah Category</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Category</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Edit Category</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Tambah Category</li>
                     </ol>
                 </nav>
             </div>
@@ -50,7 +50,7 @@
 			            </ul>
 			        </div>
 			        @endif
-                    <form novalidate="novalidate" method="POST" action= "{{action('backend\admin\CategoryController@add')}}" enctype="multipart/form-data">
+                    <form novalidate="novalidate" method="POST" action= "{{action('backend\admin\CategoriController@add')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-body">
                         <div class="row">
@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <input type="text" class="form-control pull-right" id="" placeholder="price" name="category_name" required >
+                                    <input type="text" class="form-control pull-right" id="" placeholder="nama category" name="category_name" required >
                                 </div>
                             </div>
                         </div>

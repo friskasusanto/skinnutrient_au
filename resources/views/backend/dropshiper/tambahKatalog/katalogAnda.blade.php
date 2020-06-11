@@ -1,5 +1,5 @@
-@extends('backend.layouts.index', ['active' => 'list_blog'])
-@section('title', 'Blog')
+@extends('backend.layouts.index', ['active' => 'list_katalog'])
+@section('title', 'KatalogDrosphiper')
 @section('content')
 
 <div class="page-breadcrumb">
@@ -67,9 +67,9 @@
                                     <td><img src="{{{url('product/'.$u->image)}}}" alt="..." style="width: 100%"></td>
                                     <td>
                                     @if ($u->product->stock != 0)
-                                        <button class="btn btn-success btn-icon-split btn-sm">barang tersedia</button>
+                                        <p style="color: green">barang tersedia</p>
                                     @else 
-                                        <button class="btn btn-danger btn-icon-split btn-sm">barang kosong</button>
+                                        <p style="color: red">barang kosong</p>
                                     @endif
                                     </td>
                                     <td>

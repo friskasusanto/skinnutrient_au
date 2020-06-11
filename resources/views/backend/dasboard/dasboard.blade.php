@@ -269,12 +269,49 @@
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
+            @role ('Dropshiper')
+            @if (Auth::user()->store_name == null)
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"></h4>
+                        </div>
+                        <div class="col-12">
+                            <p><center>Anda Belum Menentukan Nama Toko !!</center></p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <!-- Column -->
+                                        <div class="col-md-12 col-lg-12 col-xlg-12">
+                                            <div class="alert alert-primary">
+                                                <center><h6 class="text-black">NAMA TOKO</h6></center>
+                                                <form class="form" method="POST" action= "{{url('/storeName', Auth::user()->id)}}" enctype="multipart/form-data">
+                                                    {{ csrf_field() }}
+                                                    <input id="store_name" class="input-text" type="text" value="" name="store_name" style="width: 100%">
+                                                    <center><button type="submit" class="btn waves-effect waves-light btn-rounded btn-secondary" style="margin-top: 2%">Simpan</button></center>
+                                                </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endrole
 
 @endsection
 
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
 <script src="{{asset('backend/cart/Chart.bundle.js')}}"></script>
+<script>
+$('#myModal').modal('show');
+</script>
 <style type="text/css">
     .container {
         width: 50%;

@@ -44,6 +44,9 @@
                         <td>
                             <center>
                                 <!-- <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" style="width: 50%" id="{{$u->id}}" data-id="{{$u->id}}"><i class="fa fa-eye"></i></a> -->
+                                <center>
+                                    <a type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter{{$u->id}}"><i class="fa fa-eye"></i></a>
+                                </center>
 
                                 <a href="{{url('/dropship/detailOrder', $u->id)}}" class="btn btn-success btn-sm" style="width: 50%"><i class="fa fa-eye"></i></a>
                             </center>
@@ -74,70 +77,83 @@
         </div>
     </div>
 </div>
-<!-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      ...
+@if(isset($log))
+@foreach( $log as $u )
+<div class="modal" id="exampleModalCenter{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                        <tbody>
+                            <tr>
+                                <th>Barang</th>
+                                <th>: {{$u->product->name}}</th>
+                            </tr>
+                            <tr>
+                                <th>Tanggal Masuk</th>
+                                <th>: {{$u->entry_date}}</th>
+                            </tr>
+                            <tr>
+                                <th>Nama Pemesan</th>
+                                <th>: {{$u->user->name}}</th>
+                            </tr>
+                            <tr>
+                                <th>Nama Penerima</th>
+                                <th>: {{$u->receiver_id}}</th>
+                            </tr>
+                            <tr>
+                                <th>Alamat</th>
+                                <th>: {{$u->address}}</th>
+                            </tr>
+                            <tr>
+                                <th>No HP</th>
+                                <th>: {{$u->phone_number}}</th>
+                            </tr>
+                            <tr>
+                                <th>Total Tagihan</th>
+                                <th>: {{$u->Total_amount}}</th>
+                            </tr>
+                            <tr>
+                                <th>Payment</th>
+                                <th>: </th>
+                            </tr>
+                            <tr>
+                                <th>Tanggal payment</th>
+                                <th>: {{$u->payment_date}}</th>
+                            </tr>
+                            <tr>
+                                <th>Courier</th>
+                                <th>: {{$u->courier}}</th>
+                            </tr>
+                            <tr>
+                                <th>Harga Courier</th>
+                                <th>: {{$u->courier_price}}</th>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <th>: {{$u->status}}</th>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
-</div> -->
-<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p class="text-center">
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
- -->
-<!-- Modal -->
-<div class="modal modal-danger fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h4>
-      </div>
-      <p for="cat_id"></p>
-    </div>
-  </div>
-</div>
+@endforeach
+@endif
 
-@endsection
-
-@section('content-js')
-<!-- <script>
-    $(document).ready(function(){
-        $("#myModal").on("show.bs.modal", function(e) {
-            var id = $(e.relatedTarget).data('target-id');
-            $.get( "/dropship/load/" + id, function( data ) {
-                $(".modal-body").html(data.html);
-                .append("<b>Nama Produk:</b> "+data.name)
-                .append("<p>"+"<b>Harga Produk:</b> "+data.price+"</p>")
-                .append("<p>"+"<b>Deskripsi Produk:</b> "+data.description+"</p>")
-                .append("<p>"+"<b>Stok Produk: </b>"+data.stock+"</p>");
-            });
-
-        });
-    });
-</script> -->
-<script>
-    $('#myModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) 
-      var cat_id = button.data('catid')
-      var id = $(this).attr("id"); 
-      var modal = $(this)
-      modal.find('.modal-body #cat_id').val(cat_id);
-})
-</script>
 @endsection

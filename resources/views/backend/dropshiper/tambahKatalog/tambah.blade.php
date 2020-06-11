@@ -5,12 +5,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Katalog EAORON</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Katalog SKINNUTRIENT</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Dropshiper</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Katalog Eaoron</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Katalog Skinnutrient</li>
                     </ol>
                 </nav>
             </div>
@@ -67,7 +67,7 @@
                                     <td><img src="{{{url('product/'.$u->image)}}}" alt="..." style="width: 100%"></td>
                                     <td>
                                     @if ($u->stock != 0)
-                                        <button class="btn btn-success btn-icon-split btn-sm">barang tersedia</button>
+                                        <p style="color: green">Barang Tersedia</p>
                                     @else 
                                         <button class="btn btn-danger btn-icon-split btn-sm">barang kosong</button>
                                     @endif

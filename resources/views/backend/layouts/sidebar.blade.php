@@ -224,12 +224,12 @@
                         <li class="sidebar-item"> 
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                 <i class="fas fa-book"></i>
-                                <span class="hide-menu">Katalog EAORON</span>
+                                <span class="hide-menu">Katalog Skinnutrient</span>
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                                 <li class="sidebar-item">
                                     <a href="{{url('/dropship/katalog')}}" class="sidebar-link">
-                                        <span class="hide-menu">Katalog EAORON</span>
+                                        <span class="hide-menu">Katalog Skinnutrient</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">

@@ -31,7 +31,7 @@
         								<a href="{{action('frontend\FrontendController@shop_view_dropship', ['category' => $c->id])}}">{{$c->category_name}}<span>({{count($c->productUser)}})</span>
         								</a>
         							@else
-        								<a href="">{{$c->category_name}}<span>({{count($c->productUser)}})</span>
+        								<a href="{{action('frontend\FrontendController@shop_view_dropship', ['category' => $c->id])}}">{{$c->category_name}}<span>({{count($c->productUser)}})</span>
         								</a>
         							@endif
         							</li>
@@ -142,7 +142,13 @@
 										</div>
 		        					</div>
 		        				@endforeach
-		        			@endif
+		        			@else
+                                <div class="product product__style--3 col-12">
+                                	<p style="text-align: center"><center>PRODUCT KOSONG</center></p>
+                                </div>
+                            @endif
+
+		        			 
 		        					<!-- End Single Product -->
 		        					<!-- End Single Product -->
 	        					</div>

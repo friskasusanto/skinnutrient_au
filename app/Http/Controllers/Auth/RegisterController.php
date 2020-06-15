@@ -118,7 +118,8 @@ class RegisterController extends Controller
         ]);
         }
         // dd($user);
-        $user->assignRole('Member');
+        $role = Role::where('name','=','Member')->first();
+        $user->attachRole($role);
 
         return $user;
     }

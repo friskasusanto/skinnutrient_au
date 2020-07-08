@@ -2,6 +2,7 @@
 @section('title', 'Admin')
 @section('content') 
 
+
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
@@ -115,7 +116,9 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                    <input type="file" class="form-control" id="" name="image" multiple required style="width: 100%" value="">
-									<img src="{{url('product/'.$product->image)}}" alt="..." style="width: 20%">
+                                   <a target="_blank" href="{{url('product/'.$product->image)}}">
+									   <img src="{{url('product/'.$product->image)}}" alt="..." style="border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 25%;height: 25%">
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -128,11 +131,16 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                    <input type="file" class="form-control" id="" name="photos[]" multiple required style="width: 100%" value="">
-									@if (count($gambar) != 0)
-										@foreach ($gambar as $g)
-											<img src="{{url('product/'.$g->image)}}" alt="..." style="width: 20%">
-										@endforeach
-									@endif
+                                    @if (count($gambar) != 0)
+                                        @foreach ($gambar as $g)
+                                            <div class="image-area" style="border: 1px solid #ddd;border-radius: 4px;padding: 5px;width: 25%;height: 25%">
+                                              <a class="remove-image" href="{{action('backend\admin\ProductController@deleteProduct_gambar', $g->id)}}" style="display: inline;"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                              <a target="_blank" href="{{url('product/'.$g->image)}}">
+                                                <img src="{{url('product/'.$g->image)}}"  alt="Preview" style="width: 100%">
+                                              </a>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>

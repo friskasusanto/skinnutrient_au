@@ -1,31 +1,30 @@
-@extends('backend.layouts.index', ['active' => 'list_category'])
-@section('title', 'Category')
+@extends('backend.layouts.index', ['active' => 'all_menu'])
+@section('title', 'Menu')
 @section('content')
 
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Daftar Category</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Daftar Menu</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Category</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Daftar Category</li>
+                        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Menu</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Daftar Menu</li>
                     </ol>
                 </nav>
             </div>
         </div>
-        <!-- <div class="col-5 align-self-center">
+        <div class="col-5 align-self-center">
             <div class="customize-input float-right">
                 <form action="" method="GET">
                     <div class="customize-input">
                         <input class="form-control custom-shadow custom-radius border-0 bg-white"
-                            type="search" placeholder="cari nama product" aria-label="Search" name="search">
-                        <i class="form-control-icon" data-feather="search" type="submit"></i>
+                            type="search" placeholder="cari kode promo ..." aria-label="Search" name="search">
                     </div>
                 </form>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
 <!-- ============================================================== -->
@@ -43,56 +42,46 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                        <a type="button" class="btn waves-effect waves-light btn-rounded" style="margin-bottom: 2%; background: linear-gradient(to right,#8B4513,#8B4513,#A0522D,#DEB887,#DEB887); color: #fff" data-toggle="modal" data-target="#exampleModal">Tambah Category Menu<i class="fa fa-plus" style="padding: 5px; color: #fff"></i></a>
+                    <a type="button" class="btn waves-effect waves-light btn-rounded" style="margin-bottom: 2%; background: linear-gradient(to right,#FF3333,#FF0000,#FF0000,#DC143C,#B22222); color: #fff" data-toggle="modal" data-target="#exampleModal">Tambah Menu<i class="fa fa-plus" style="padding: 5px; color: #fff"></i></a>
 
-                        <select name="status" type="text" class="form-control" style="width: 100%">
-                              <option value="">--pilih menu by--</option>
-                              @if ($product->status == 1)
-                              <option value="">--sembunyikan--</option>
-                              @elseif ($product->status == 0)
-                              <option value="">--tampilkan--</option>
-                              @endif
-                        </select>
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th>Nama Category</th>
                                     <th>Menu By</th>
                                     <th>Status</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @if(count($category) != 0)
-                                @foreach ($category as $key =>$u)
+                            @if(count($menu) != 0)
+                                @foreach ($menu as $key =>$u)
                                 <tr>
                                     <td>{{++$key}}</td>
-                                    <td>{{$u->category_name}}</td>
-                                    <td>{{$u->menu->name}}</td>
-                                    @if ($u->status == 0)
-                                        <td style="color: red">menu tidak aktif</td>
-                                    @else
-                                        <td style="color: green">menu aktif</td>
-                                    @endif
+                                    <td>{{$u->name}}</td>
+                                @if ($u->status == 0)
+                                    <td style="color: red">menu tidak aktif</td>
+                                @else
+                                    <td style="color: green">menu aktif</td>
+                                @endif
                                     <td>
-                                    <center>
-                                        <a type="button" class="btn btn-circle btn-warning btn-icon-split btn-sm" style="font-size: xx-small;" data-toggle="modal" data-target="#modalEdit{{$u->id}}"><i class="fa fa-edit" style="padding: 5px; color: #000"></i></a> 
+                                        <center>
+                                            <a type="button" class="btn btn-circle btn-warning btn-icon-split btn-sm" style="font-size: xx-small;" data-toggle="modal" data-target="#modalEdit{{$u->id}}"><i class="fa fa-edit" style="padding: 5px; color: #000"></i></a> 
 
-                                        <a href="{{url('/delete_category', $u->id)}}" class="btn btn-circle btn-danger btn-icon-split btn-sm" style="font-size: xx-small;"><i class="fa fa-trash" style="padding: 5px; color: #000"></i></a>
-                                    </center>
+                                            <a href="{{url('/delete_menu', $u->id)}}" class="btn btn-circle btn-danger btn-icon-split btn-sm" style="font-size: xx-small;"><i class="fa fa-trash" style="padding: 5px; color: #000"></i></a>
+                                        </center>
                                     </td>
                                 </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="5"><center>KOSONG</center></td>
+                                    <td colspan="4"><center>KOSONG</center></td>
                                 </tr>
                             @endif 
                             </tbody>
                         </table>
-                        {{$category->render()}}
+                        {{$menu->render()}}
                     </div>
                 </div>
             </div>
@@ -100,33 +89,21 @@
     </div>
 </div>
 
-@if(isset($category))
-@foreach( $category as $u )
+@if(isset($menu))
+@foreach( $menu as $u )
 <div class="modal" id="modalEdit{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><center>Edit Category Menu</center></h5>
+                <h5 class="modal-title"><center>Edit Menu</center></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form novalidate="novalidate" method="POST" action= "{{url('/edit_category', $u->id)}}">
+                <form novalidate="novalidate" method="POST" action= "{{url('/edit_menu', $u->id)}}">
                     {{ csrf_field() }}
                         <div class="form-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Category Menu</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                       <input type="text" class="form-control" id="" name="category_name" required style="width: 100%" value="{{$u->category_name}}">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -135,12 +112,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                       <select name="menu_id" type="text" class="form-control" style="width: 100%">
-                                            <option value="">--pilih menu by--</option>
-                                            @foreach ($menu as $m)
-                                            <option value= "{{$m->id}}">{{$m->name}}</option>
-                                            @endforeach
-                                        </select>
+                                       <input type="text" class="form-control" id="" name="name" required style="width: 100%" value="{{$u->name}}">
                                     </div>
                                 </div>
                             </div>
@@ -182,27 +154,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><center>Tambah Category Menu</center></h5>
+                <h5 class="modal-title"><center>Tambah Menu By</center></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form novalidate="novalidate" method="POST" action= "{{url('/add_category')}}">
+                <form novalidate="novalidate" method="POST" action= "{{url('/add_menu')}}">
                     {{ csrf_field() }}
                         <div class="form-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Category Menu</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                       <input type="text" class="form-control" id="" name="category_name" required style="width: 100%">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -211,14 +171,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                       
-                                       <select name="menu_id" type="text" class="form-control" style="width: 100%">
-                                            <option value="">--pilih menu by--</option>
-                                            @foreach ($menu as $m)
-                                            <option value= "{{$m->id}}">{{$m->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        
+                                       <input type="text" class="form-control" id="" name="name" required style="width: 100%">
                                     </div>
                                 </div>
                             </div>

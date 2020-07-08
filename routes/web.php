@@ -112,19 +112,26 @@ Route::group(['middleware' => ['auth', 'verified']], function ()  {
 
 //ADMIN
 
+	//MenuController
+    Route::get('/list_menu', 'backend\admin\MenuController@index')->name('list_menu');
+    Route::get('/delete_menu/{id}', 'backend\admin\MenuController@deleteMenu')->name('delete_menu');
+    Route::post('/edit_menu/{id}', 'backend\admin\MenuController@editMenu')->name('edit_menu');
+    Route::post('/add_menu', 'backend\admin\MenuController@addMenu')->name('add_menu');
+
 	//DASBOARD
-	Route::get('/dasboard', array('as' => 'admin.dasboard','uses' => 'backend\admin\BackendController@dasboard'))->name('admin_dasboard');
-	Route::post('/storeName/{id}', array('as' => 'storeName','uses' => 'backend\admin\BackendController@store'))->name('storeName');
+	Route::get('/dasboard', 'backend\admin\BackendController@dasboard')->name('admin_dasboard');
+	Route::post('/storeName/{id}', 'backend\admin\BackendController@store')->name('storeName');
 
 	//PRODUCT
-	Route::get('/admin/gambar_product', array('as' => 'admin.gambarproduct','uses' => 'backend\admin\ProductController@index_product'))->name('admin_index_product');
+	Route::get('/admin/gambar_product', 'backend\admin\ProductController@index_product')->name('admin_index_product');
 
-	Route::get('/admin/index/product', array('as' => 'admin.index.product','uses' => 'backend\admin\ProductController@gambar_product_view'))->name('admin_gambarproduct');
-	Route::get('/admin/edit/product/{id}', array('as' => 'admin.edit.view','uses' => 'backend\admin\ProductController@edit_view_product'))->name('admin_edit_view');
-	Route::post('/admin/edit/product/{id}', array('as' => 'admin.edit','uses' => 'backend\admin\ProductController@edit_product'))->name('admin_edit_product');
-	Route::get('/admin/delete/product/{id}', array('as' => 'admin.delete','uses' => 'backend\admin\ProductController@delete_product'))->name('admin_delete_product');
-	Route::get('/admin/add_view/product', array('as' => 'admin.add.product','uses' => 'backend\admin\ProductController@add_view_product'))->name('admin_add_view_product');
-	Route::post('/admin/add/product', array('as' => 'admin.add.product','uses' => 'backend\admin\ProductController@add_product'))->name('admin_add_product');
+	Route::get('/admin/index/product', 'backend\admin\ProductController@gambar_product_view')->name('admin_gambarproduct');
+	Route::get('/admin/edit/product/{id}', 'backend\admin\ProductController@edit_view_product')->name('admin_edit_view');
+	Route::post('/admin/edit/product/{id}', 'backend\admin\ProductController@edit_product')->name('admin_edit_product');
+	Route::get('/admin/delete/product/{id}', 'backend\admin\ProductController@delete_product')->name('admin_delete_product');
+	Route::get('/admin/delete/productGambar/{id}', 'backend\admin\ProductController@deleteProduct_gambar')->name('admin_deleteProductGambar');
+	Route::get('/admin/add_view/product', 'backend\admin\ProductController@add_view_product')->name('admin_add_view_product');
+	Route::post('/admin/add/product', 'backend\admin\ProductController@add_product')->name('admin_add_product');
 
 
 	//USER
@@ -152,12 +159,10 @@ Route::group(['middleware' => ['auth', 'verified']], function ()  {
 	Route::get('/admin/catalog/delete/{id}', array('as' => 'admin.delete.catalog','uses' => 'backend\admin\CatalogController@delete'))->name('admin_delete_catalog');
 
 	//CATEGORY
-	Route::get('/admin/category/index', array('as' => 'admin.index.category','uses' => 'backend\admin\CategoriController@index'))->name('admin_index_category');
-	Route::get('/admin/edit/category/{id}', array('as' => 'admin.category.approve','uses' => 'backend\admin\CategoriController@edit_view'))->name('admin_category.edit');
-	Route::post('/admin/category/edit/{id}', array('as' => 'admin.category.edit','uses' => 'backend\admin\CategoriController@edit'))->name('admin_category_edit');
-	Route::get('/admin/add/category', array('as' => 'admin.category.add','uses' => 'backend\admin\CategoriController@add_view'))->name('admin_category.add');
-	Route::post('/admin/add/category', array('as' => 'admin.category.add','uses' => 'backend\admin\CategoriController@add'))->name('admin_category_add');
-	Route::get('/admin/category/delete/{id}', array('as' => 'admin.delete.category','uses' => 'backend\admin\CategoriController@delete'))->name('admin_delete_category');
+	Route::get('/list_category', 'backend\admin\CategoriController@index')->name('list_category');
+    Route::get('/delete_category/{id}', 'backend\admin\CategoriController@deleteCategory')->name('delete_category');
+    Route::post('/edit_category/{id}', 'backend\admin\CategoriController@editCategory')->name('edit_category');
+    Route::post('/add_category', 'backend\admin\CategoriController@addCategory')->name('add_category');
 
 	//GUDANG
 	Route::get('/admin/gudang/index', array('as' => 'admin.index.gudang','uses' => 'backend\admin\GudangController@index'))->name('admin_index_gudang');

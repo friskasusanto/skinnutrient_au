@@ -21,7 +21,6 @@
                     <div class="customize-input">
                         <input class="form-control custom-shadow custom-radius border-0 bg-white"
                             type="search" placeholder="cari nama product" aria-label="Search" name="search">
-                        <i class="form-control-icon" data-feather="search" type="submit"></i>
                     </div>
                 </form>
             </div>
@@ -75,9 +74,9 @@
                                     <td>{{$u->max_price}}</td>
 
                                 @if ($u->status == 1)
-                                    <td><button class="btn btn-danger btn-icon-split btn-sm">tidak aktif</button></td>
+                                    <td><p style="color: red">tidak aktif</p></td>
                                 @elseif ($u->status == 0)
-                                    <td><button class="btn btn-success btn-icon-split btn-sm">aktif</button></td>
+                                    <td><p style="color: green">aktif</p></td>
                                 @elseif ($u->status == null)
                                     <td>-</td>
                                 @endif
@@ -88,9 +87,9 @@
                                                 <i class="fas fa-edit" style="padding: 5px;"></i>
                                             </a> -->
 
-                                            <a type="button" class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#exampleModalCenter{{$u->id}}"><i class="fas fa-edit" style="padding: 5px;"></i></a>
+                                            <a type="button" class="btn btn-circle btn-warning btn-icon-split btn-sm" style="font-size: xx-small;" data-toggle="modal" data-target="#modalEdit{{$u->id}}"><i class="fas fa-edit" style="padding: 5px;"></i></a>
 
-                                            <a href="{{action('backend\admin\ProductController@delete_product', $u->id)}}"class="btn btn-danger btn-icon-split btn-sm" style="font-size: xx-small;">
+                                            <a href="{{action('backend\admin\ProductController@delete_product', $u->id)}}" class="btn btn-circle btn-danger btn-icon-split btn-sm" style="font-size: xx-small;">
                                                  <i class="fas fa-trash" style="padding: 5px;"></i> 
                                             </a>
                                     </center>
@@ -114,7 +113,7 @@
 
 @if(isset($product))
 @foreach( $product as $u )
-<div class="modal" id="exampleModalCenter{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal" id="modalEdit{{$u->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

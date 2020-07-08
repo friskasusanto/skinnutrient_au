@@ -1,5 +1,5 @@
 @extends('backend.layouts.index', ['active' => 'tambah_product'])
-@section('title', 'User')
+@section('title', 'Product')
 @section('content')
 
 

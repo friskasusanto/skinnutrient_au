@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Log;
+use App\Menu;
 use Auth;
 
 class CategoriController extends Controller
@@ -13,23 +14,27 @@ class CategoriController extends Controller
     //CATEGORI
     public function index ()
     {
-    	$category = Category::paginate(10);
+        $menu = Menu::orderBy('created_at', 'desc')->paginate(10);
 
-    	return view('backend.admin.category.index', compact(['category']));
+        if ($request->category) {
+        	$category = Category::orderBy('id', 'desc')->paginate(10)->with('menu');
+        }
+
+    	return view('backend.admin.category.index', compact(['category', 'menu']));
     }
-
-    public function edit_view (Request $request, $id)
-    {
-    	$category = Category::find($id);
-    	return view('backend.admin.category.edit', compact(['category']));
-    }
-
-    public function edit (Request $request, $id)
+    public function editCategory (Request $request, $id)
     {
     	$status = 200;
         $message = "Data Berhasil di Update";
     	$edit = Category::find($id);
     	$edit->category_name = $request->category_name;
+
+    if ($request->menu_id == null){
+        $edit->menu_id = $edit->menu_id;
+    }elseif($request->menu_id != null){
+        $edit->menu_id = $request->menu_id;
+    }
+
     if ($request->status == null){
         $edit->status = $edit->status;
     }elseif($request->status != null){
@@ -46,19 +51,17 @@ class CategoriController extends Controller
         $log->tgl_action = date('Y-m-d H:i:s');
         $log->save();
 
-    	return redirect('/admin/category/index')->with(['flash_status' => $status,'flash_message' => $message]);
-    }
-    public function add_view ()
-    {
-    	return view('backend.admin.category.add');
+    	return redirect()->back()->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
-    public function add (Request $request)
+    public function addCategory (Request $request)
     {
     	$status = 200;
         $message = "Data Berhasil di Tambah";
     	$add = new Category;
     	$add->category_name = $request->category_name;
+        $add->menu_id = $request->menu_id;
+        $add->status = 1;
     	$add->save();
 
         $log = new Log;
@@ -70,12 +73,12 @@ class CategoriController extends Controller
         $log->tgl_action = date('Y-m-d H:i:s');
         $log->save();
 
-    	return redirect('/admin/category/index')->with(['flash_status' => $status,'flash_message' => $message]);
+    	return redirect()->back()->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
-    public function delete (Request $request, $id)
+    public function deleteCategory (Request $request, $id)
     {
-    	$status = 500;
+    	$status = 200;
         $message = "Data Berhasil di Hapus";
     	$delete = Category::find($id);
     	$delete->delete();

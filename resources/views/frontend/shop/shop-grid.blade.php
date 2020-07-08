@@ -26,7 +26,7 @@
         						<h3 class="wedget__title">Kategori Produk</h3>
         						<ul>
         						@foreach ($category as $c)
-        							<li><a href="{{route('shop', ['category' => $c->id])}}">{{$c->category_name}}<span>({{count($c->product)}})</span></a></li>
+        							<li><a href="{{route('shop', ['category' => $c->id])}}">{{$c->category_name}}</a></li>
         						@endforeach
         						</ul>
         					</aside><!-- 

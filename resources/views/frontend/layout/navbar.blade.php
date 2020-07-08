@@ -13,35 +13,17 @@
 							<ul class="meninmenu d-flex justify-content-start">
 							@role('Admin')
 								<li class="drop with--one--item"><a href="{{ route('index') }}">Home </a></li>
-								<li class="drop"><a href="#">Produk</a>
-									<div class="megamenu dropdown">
-										<ul class="item item01">
-											<li><a href="{{ route('shop') }}">EAORON</a></li>
-											<li><a href="{{ route('shop', ['category' => 5])}}">PPY</a></li>
-										</ul>
-									</div>
+								<li class="drop"><a href="{{ route('shop') }}">Produk</a>
 								</li>
 							@endrole
 							@role('Member')
 								<li class="drop with--one--item"><a href="{{ route('index') }}">Home</a></li>
-								<li class="drop"><a href="#">Produk</a>
-									<div class="megamenu dropdown">
-										<ul class="item item01">
-											<li><a href="{{ route('shop') }}">EAORON</a></li>
-											<li><a href="{{ route('shop', ['category' => 5])}}">PPY</a></li>
-										</ul>
-									</div>
+								<li class="drop"><a href="{{ route('shop') }}">Produk</a>
 								</li>
 							@endrole
 							@if (! Auth::check())
 								<li class="drop with--one--item"><a href="{{ route('index') }}">Home</a></li>
-								<li class="drop"><a href="#">Produk</a>
-									<div class="megamenu dropdown">
-										<ul class="item item01">
-											<li><a href="{{ route('shop') }}">EAORON</a></li>
-											<li><a href="{{ route('shop', ['category' => 5])}}">PPY</a></li>
-										</ul>
-									</div>
+								<li class="drop"><a href="{{ route('shop') }}">Produk</a>
 								</li>
 							@endif
 								

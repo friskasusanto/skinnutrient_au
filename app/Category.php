@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = [
-    	'name'
+    	'category_name', 'status', 'menu_id'
     ];
 
     public function product()
@@ -17,6 +17,14 @@ class Category extends Model
     public function productUser()
     {
         return $this->hasMany('App\ProductUser', 'category_id');
+    }
+    public function menuBy()
+    {
+        return $this->hasMany('App\menu', 'menu_id');
+    }
+    public function menu()
+    {
+        return $this->belongsTo('App\Menu', 'menu_id');
     }
 }
 

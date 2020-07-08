@@ -16,6 +16,25 @@ class ProductController extends Controller
 {
 //PRODUCT
 
+    public function deleteProduct_gambar(Request $request, $id)
+    {
+        $status = 200;
+        $message = "Data Berhasil di Hapus";
+        $delete = ProductGambar::find($id);
+        $delete->delete();
+
+        $log = new Log;
+        $log->mutasi_action = "delete product ". $request->name;
+        $log->user_id = Auth::user()->id;
+        $log->controller = "ProductController";
+        $log->function = "delete_product";
+        $log->keterangan = "hapus product berhasil";
+        $log->tgl_action = date('Y-m-d H:i:s');
+        $log->save();
+
+        return redirect()->back()->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
     public function gambar_product_view ()
     {
         $gambar = Product::with('product_image')->orderBy('created_at', 'desc')->paginate(10);

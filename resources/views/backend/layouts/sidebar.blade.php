@@ -91,6 +91,19 @@
                                 </li>
                             </ul>
                         </li>
+                        <!-- <li class="sidebar-item"> 
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <i class="far fa-bookmark"></i>
+                                <span class="hide-menu">Menu By</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="{{url('/list_menu')}}" class="sidebar-link">
+                                        <span class="hide-menu">Daftar Menu</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> -->
                         <li class="sidebar-item"> 
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                 <i class="far fa-bookmark"></i>
@@ -98,13 +111,13 @@
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                                 <li class="sidebar-item">
-                                    <a href="{{action('backend\admin\CategoriController@index')}}" class="sidebar-link">
-                                        <span class="hide-menu">Daftar Category</span>
+                                    <a href="{{url('/list_menu')}}" class="sidebar-link">
+                                        <span class="hide-menu">Menu By</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="{{action('backend\admin\CategoriController@add_view')}}" class="sidebar-link">
-                                        <span class="hide-menu">Tambah Category</span>
+                                    <a href="{{url('/list_category')}}" class="sidebar-link">
+                                        <span class="hide-menu">Daftar Category</span>
                                     </a>
                                 </li>
                             </ul>

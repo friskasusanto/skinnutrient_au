@@ -18,10 +18,6 @@ class Category extends Model
     {
         return $this->hasMany('App\ProductUser', 'category_id');
     }
-    public function menuBy()
-    {
-        return $this->hasMany('App\menu', 'menu_id');
-    }
     public function menu()
     {
         return $this->belongsTo('App\Menu', 'menu_id');

@@ -14,6 +14,7 @@ use App\Checkout;
 use App\ProductGambar;
 use App\Comment;
 use App\Rating;
+use App\menu;
 use Auth;
 use Mail;
 use Hash;
@@ -217,22 +218,59 @@ class FrontendController extends Controller
     {
         $product = Product::paginate(16);
         $category = Category::with('product')->orderBy('created_at', 'desc')->get();
+
+        if($request->menu == 1){
+            $category = Category::with('product')->where('menu_id', 1)->orderBy('created_at', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 1)->orderBy('created_at', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(16);
+
+        }elseif($request->menu == 2){
+            $category = Category::with('product')->where('menu_id', 2)->orderBy('created_at', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 2)->orderBy('created_at', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+            ;
+        }elseif($request->menu == 3){
+            $category = Category::with('product')->where('menu_id', 3)->orderBy('created_at', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 3)->orderBy('created_at', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+        }
+
+            
         // dd($category);
         if ($request->category) {
+            $menu = Menu::with('category')->get();
+            $category = Category::with('product')->get();
             $product = Product::orWhere('category_id', $request->category)->orderBy('created_at', 'desc')->paginate(16);
-            $category = Category::with('product')->get();
-            // dd($product);
+
         }elseif ($request->name) {
-            $product = Product::orWhere('name', 'like', '%'.$request->name.'%')->orderBy('created_at', 'desc')->paginate(16);
             $category = Category::with('product')->get();
+            $product = Product::orWhere('name', 'like', '%'.$request->name.'%')->orderBy('created_at', 'desc')->paginate(16);
+            
         }
+
     	return view('frontend.shop.shop-grid', compact(['product', 'category']));
     }
     public function shop_view_terbaru (Request $request)
     {
         $product = Product::orderBy('created_at', 'desc')->paginate(16);
         $category = Category::with('product')->orderBy('created_at', 'desc')->get();
-        // dd($category);
+
+        if($request->menu == 1){
+            $category = Category::with('product')->where('menu_id', 1)->orderBy('created_at', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 1)->orderBy('created_at', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+
+        }elseif($request->menu == 2){
+            $category = Category::with('product')->where('menu_id', 2)->orderBy('created_at', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 2)->orderBy('created_at', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+            ;
+        }elseif($request->menu == 3){
+            $category = Category::with('product')->where('menu_id', 3)->orderBy('created_at', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 3)->orderBy('created_at', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+        }
+
         if ($request->category) {
             $product = Product::orWhere('category_id', $request->category)->orderBy('created_at', 'desc')->paginate(16);
             $category = Category::with('product')->get();
@@ -247,7 +285,23 @@ class FrontendController extends Controller
     {
         $product = Product::orderBy('price', 'asc')->paginate(16);
         $category = Category::with('product')->orderBy('created_at', 'desc')->get();
-        // dd($category);
+
+        if($request->menu == 1){
+            $category = Category::with('product')->where('menu_id', 1)->orderBy('created_at', 'asc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 1)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+
+        }elseif($request->menu == 2){
+            $category = Category::with('product')->where('menu_id', 2)->orderBy('created_at', 'asc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 2)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+            ;
+        }elseif($request->menu == 3){
+            $category = Category::with('product')->where('menu_id', 3)->orderBy('created_at', 'asc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 3)->orderBy('created_at', 'asc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+        }
+
         if ($request->category) {
             $product = Product::orWhere('category_id', $request->category)->orderBy('created_at', 'desc')->paginate(16);
             $category = Category::with('product')->get();
@@ -262,7 +316,23 @@ class FrontendController extends Controller
     {
         $product = Product::orderBy('price', 'desc')->paginate(16);
         $category = Category::with('product')->orderBy('created_at', 'desc')->get();
-        // dd($category);
+
+        if($request->menu == 1){
+            $category = Category::with('product')->where('menu_id', 1)->orderBy('price', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 1)->orderBy('price', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+
+        }elseif($request->menu == 2){
+            $category = Category::with('product')->where('menu_id', 2)->orderBy('price', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 2)->orderBy('price', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+            ;
+        }elseif($request->menu == 3){
+            $category = Category::with('product')->where('menu_id', 3)->orderBy('price', 'desc')->get();
+            $categoryId = Category::with('product')->where('menu_id', 3)->orderBy('price', 'desc')->pluck('id')->toArray();
+            $product = Product::whereIn('category_id', $categoryId)->paginate(16);
+        }
+
         if ($request->category) {
             $product = Product::orWhere('category_id', $request->category)->orderBy('created_at', 'desc')->paginate(16);
             $category = Category::with('product')->get();

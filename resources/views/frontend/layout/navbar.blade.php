@@ -14,6 +14,16 @@
 							@role('Admin')
 								<li class="drop with--one--item"><a href="{{ route('index') }}">Home </a></li>
 								<li class="drop"><a href="{{ route('shop') }}">Produk</a>
+									<div class="megamenu dropdown">
+										<ul class="item item01">
+											<?php
+												$menu = App\Menu::with('category')->get();
+											?>
+											@foreach ($menu as $c)
+			        							<li><a href="{{route('shop', ['menu' => $c->id])}}">{{$c->name}}</a></li>
+			        						@endforeach
+										</ul>
+									</div>
 								</li>
 							@endrole
 							@role('Member')

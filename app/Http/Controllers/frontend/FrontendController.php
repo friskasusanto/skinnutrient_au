@@ -212,7 +212,7 @@ class FrontendController extends Controller
         $blog = Blog::orderBy('created_at', 'desc')->limit(3)->with('comment')->get();
         // dd($blog);
 
-    	return view('frontend.index', compact(['product_kami', 'blog']));
+    	return view('frontend.comingsoon', compact(['product_kami', 'blog']));
     }
     public function shop_view (Request $request)
     {
